@@ -122,11 +122,14 @@
             // 
             // dgvExpedientes
             // 
+            this.dgvExpedientes.AllowUserToAddRows = false;
+            this.dgvExpedientes.AllowUserToDeleteRows = false;
             this.dgvExpedientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvExpedientes.Location = new System.Drawing.Point(9, 256);
             this.dgvExpedientes.Name = "dgvExpedientes";
             this.dgvExpedientes.Size = new System.Drawing.Size(526, 182);
             this.dgvExpedientes.TabIndex = 7;
+            this.dgvExpedientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExpedientes_CellContentClick);
             // 
             // txtCodigo
             // 
@@ -174,6 +177,7 @@
             this.btnRegistrar.TabIndex = 13;
             this.btnRegistrar.Text = "REGISTRAR";
             this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // btnBuscar
             // 
