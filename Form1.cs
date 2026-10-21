@@ -15,6 +15,7 @@ namespace TrabajoFinal_FP
         public Form1()
         {
             InitializeComponent();
+            Console.WriteLine("Probango Git");
         }
     }
 }
