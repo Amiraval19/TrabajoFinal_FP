@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TrabajoFinal_FP
 {
@@ -18,11 +19,89 @@ namespace TrabajoFinal_FP
         List<string> tramites = new List<string>();
         List<string> areas = new List<string>();
         List<DateTime> fechas = new List<DateTime>();
+        string ruta = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Expedientes.csv");
+        private void GuardarExcel()
+        {
+            using (StreamWriter archivo = new StreamWriter(ruta, false, Encoding.UTF8))
+            {
+                archivo.WriteLine("Código;DNI;Ciudadano;Trámite;Área asignada;Fecha");
 
+                for (int i = 0; i < codigos.Count; i++)
+                {
+                    archivo.WriteLine(
+                        codigos[i] + ";" +
+                        dnis[i] + ";" +
+                        nombres[i] + ";" +
+                        tramites[i] + ";" +
+                        areas[i] + ";" +
+                        fechas[i].ToString("dd/MM/yyyy")
+                    );
+                }
+            }
+        }
+
+        private void CargarArchivo()
+        {
+            if (File.Exists(ruta))
+            {
+                using (StreamReader archivo = new StreamReader(ruta))
+                {
+                   
+                    archivo.ReadLine();
+
+                    while (!archivo.EndOfStream)
+                    {
+                        string linea = archivo.ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(linea))
+                        {
+                            continue;
+                        }
+
+                        string[] datos = linea.Split(';');
+
+                        if (datos.Length == 6)
+                        {
+                            DateTime fecha;
+
+                            if (DateTime.TryParseExact(
+                                datos[5],
+                                "dd/MM/yyyy",
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                System.Globalization.DateTimeStyles.None,
+                                out fecha))
+                            {
+                                codigos.Add(datos[0]);
+                                dnis.Add(datos[1]);
+                                nombres.Add(datos[2]);
+                                tramites.Add(datos[3]);areas.Add(datos[4]); fechas.Add(fecha);
+
+                                dgvExpedientes.Rows.Add( datos[0], datos[1],datos[2],datos[3],
+                                    datos[4],fecha.ToShortDateString()
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ConfigurarTabla()
+        {
+            dgvExpedientes.Columns.Clear();
+
+            dgvExpedientes.Columns.Add("colCodigo", "Código");
+            dgvExpedientes.Columns.Add("colDNI", "DNI");
+            dgvExpedientes.Columns.Add("colNombre", "Ciudadano");
+            dgvExpedientes.Columns.Add("colTramite", "Trámite");
+            dgvExpedientes.Columns.Add("colArea", "Área asignada");
+            dgvExpedientes.Columns.Add("colFecha", "Fecha de registro");
+        }
         public Form1()
         {
             InitializeComponent();
-            dgvExpedientes_CellContentClick(null, null);
+            ConfigurarTabla();
             
             cboTramite.Items.Add("Impuesto predial");
             cboTramite.Items.Add("Arbitrios municipales");
@@ -30,6 +109,8 @@ namespace TrabajoFinal_FP
 
             cboTramite.DropDownStyle = ComboBoxStyle.DropDownList;
             dtpFecha.Value = DateTime.Today;
+
+            CargarArchivo();
         }
 
         private void cboTramite_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,21 +141,15 @@ namespace TrabajoFinal_FP
 
         private void dgvExpedientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Limpiar columnas existentes
-            dgvExpedientes.Columns.Clear();
-            // Agregar columnas
-            dgvExpedientes.Columns.Add("colCodigo", "Código");
-            dgvExpedientes.Columns.Add("colDNI", "DNI");
-            dgvExpedientes.Columns.Add("colNombre", "Ciudadano");
-            dgvExpedientes.Columns.Add("colTramite", "Trámite");
-            dgvExpedientes.Columns.Add("colArea", "Área asignada");
-            dgvExpedientes.Columns.Add("colFecha", "Fecha de registro");
-            // Ajustar columnas al tamaño de la tabla
-            dgvExpedientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            if (Validaciones.CamposCompletos(txtCodigo.Text,txtDNI.Text,txtNombre.Text,txtArea.Text) == false)
+            {
+                MessageBox.Show("Por favor, complete los campos vacios");
+                return;
+            }
             codigos.Add(txtCodigo.Text.Trim());
             dnis.Add(txtDNI.Text.Trim());
             nombres.Add(txtNombre.Text.Trim());
@@ -82,7 +157,7 @@ namespace TrabajoFinal_FP
             areas.Add(txtArea.Text);
             fechas.Add(dtpFecha.Value.Date);
 
-            // Mostrar en el DataGridView
+          
             dgvExpedientes.Rows.Add(
                 txtCodigo.Text.Trim(),
                 txtDNI.Text.Trim(),
@@ -91,7 +166,7 @@ namespace TrabajoFinal_FP
                 txtArea.Text,
                 dtpFecha.Value.ToShortDateString()
             );
-
+            GuardarExcel();
             MessageBox.Show("Expediente registrado correctamente");
 
             btnLimpiar.PerformClick();
@@ -165,7 +240,7 @@ namespace TrabajoFinal_FP
                     }
                 }
             }
-            //actualizar la tabla después de ordenar las listas.
+       
             dgvExpedientes.Rows.Clear();
 
             for (int i = 0; i < codigos.Count; i++)

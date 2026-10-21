@@ -124,6 +124,7 @@
             // 
             this.dgvExpedientes.AllowUserToAddRows = false;
             this.dgvExpedientes.AllowUserToDeleteRows = false;
+            this.dgvExpedientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvExpedientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvExpedientes.Location = new System.Drawing.Point(9, 256);
             this.dgvExpedientes.Name = "dgvExpedientes";
