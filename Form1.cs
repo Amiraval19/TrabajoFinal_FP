@@ -13,12 +13,7 @@ namespace TrabajoFinal_FP
 {
     public partial class Form1 : Form
     {
-        List<string> codigos = new List<string>();
-        List<string> dnis = new List<string>();
-        List<string> nombres = new List<string>();
-        List<string> tramites = new List<string>();
-        List<string> areas = new List<string>();
-        List<DateTime> fechas = new List<DateTime>();
+        ListaExpedientes datos = new ListaExpedientes();
         string ruta = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Expedientes.csv");
         private void GuardarExcel()
@@ -27,15 +22,15 @@ namespace TrabajoFinal_FP
             {
                 archivo.WriteLine("Código;DNI;Ciudadano;Trámite;Área asignada;Fecha");
 
-                for (int i = 0; i < codigos.Count; i++)
+                for (int i = 0; i < datos.codigos.Count; i++)
                 {
                     archivo.WriteLine(
-                        codigos[i] + ";" +
-                        dnis[i] + ";" +
-                        nombres[i] + ";" +
-                        tramites[i] + ";" +
-                        areas[i] + ";" +
-                        fechas[i].ToString("dd/MM/yyyy")
+                        datos.codigos[i] + ";" +
+                        datos.dnis[i] + ";" +
+                        datos.nombres[i] + ";" +
+                        datos.tramites[i] + ";" +
+                        datos.areas[i] + ";" +
+                        datos.fechas[i].ToString("dd/MM/yyyy")
                     );
                 }
             }
@@ -59,26 +54,28 @@ namespace TrabajoFinal_FP
                             continue;
                         }
 
-                        string[] datos = linea.Split(';');
+                        string[] campos = linea.Split(';');
 
-                        if (datos.Length == 6)
+                        if (campos.Length == 6)
                         {
                             DateTime fecha;
 
                             if (DateTime.TryParseExact(
-                                datos[5],
+                                campos[5],
                                 "dd/MM/yyyy",
                                 System.Globalization.CultureInfo.InvariantCulture,
                                 System.Globalization.DateTimeStyles.None,
                                 out fecha))
                             {
-                                codigos.Add(datos[0]);
-                                dnis.Add(datos[1]);
-                                nombres.Add(datos[2]);
-                                tramites.Add(datos[3]);areas.Add(datos[4]); fechas.Add(fecha);
+                                datos.codigos.Add(campos[0]);
+                                datos.dnis.Add(campos[1]);
+                                datos.nombres.Add(campos[2]);
+                                datos.tramites.Add(campos[3]);
+                                datos.areas.Add(campos[4]);
+                                datos.fechas.Add(fecha);
 
-                                dgvExpedientes.Rows.Add( datos[0], datos[1],datos[2],datos[3],
-                                    datos[4],fecha.ToShortDateString()
+                                dgvExpedientes.Rows.Add( campos[0], campos[1],campos[2],campos[3],
+                                    campos[4],fecha.ToShortDateString()
                                 );
                             }
                         }
@@ -155,7 +152,7 @@ namespace TrabajoFinal_FP
                 MessageBox.Show("El DNI debe contener exactamente 8 números");
                 return;
             }
-            if (Validaciones.CodigoRepetido(txtCodigo.Text.Trim(), codigos) == true)
+            if (Validaciones.CodigoRepetido(txtCodigo.Text.Trim(), datos.codigos) == true)
             {
                 MessageBox.Show("El codigo de expediente ya existe, ingrese otro codigo");
                 return;
@@ -165,12 +162,12 @@ namespace TrabajoFinal_FP
                 MessageBox.Show("El codigo no puede contener caracteres especiales");
                 return;
             }
-            codigos.Add(txtCodigo.Text.Trim());
-            dnis.Add(txtDNI.Text.Trim());
-            nombres.Add(txtNombre.Text.Trim());
-            tramites.Add(cboTramite.Text);
-            areas.Add(txtArea.Text);
-            fechas.Add(dtpFecha.Value.Date);
+            datos.codigos.Add(txtCodigo.Text.Trim());
+            datos.dnis.Add(txtDNI.Text.Trim());
+            datos.nombres.Add(txtNombre.Text.Trim());
+            datos.tramites.Add(cboTramite.Text);
+            datos.areas.Add(txtArea.Text);
+            datos.fechas.Add(dtpFecha.Value.Date);
 
           
             dgvExpedientes.Rows.Add(
@@ -198,15 +195,15 @@ namespace TrabajoFinal_FP
                 return;
             }
 
-            for (int i = 0; i < codigos.Count; i++)
+            for (int i = 0; i < datos.codigos.Count; i++)
             {
-                if (codigos[i] == codigoBuscar)
+                if (datos.codigos[i] == codigoBuscar)
                 {
-                    txtDNI.Text = dnis[i];
-                    txtNombre.Text = nombres[i];
-                    cboTramite.Text = tramites[i];
-                    txtArea.Text = areas[i];
-                    dtpFecha.Value = fechas[i];
+                    txtDNI.Text = datos.dnis[i];
+                    txtNombre.Text = datos.nombres[i];
+                    cboTramite.Text = datos.tramites[i];
+                    txtArea.Text = datos.areas[i];
+                    dtpFecha.Value = datos.fechas[i];
 
                     encontrado = true;
 
@@ -223,47 +220,47 @@ namespace TrabajoFinal_FP
 
         private void btnOrdenar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < codigos.Count; i++)
+            for (int i = 0; i < datos.codigos.Count; i++)
             {
-                for (int j = i + 1; j < codigos.Count; j++)
+                for (int j = i + 1; j < datos.codigos.Count; j++)
                 {
-                    if (string.Compare(codigos[i], codigos[j]) > 0)
+                    if (string.Compare(datos.codigos[i], datos.codigos[j]) > 0)
                     {
-                        string ordenamiento = codigos[i];
-                        codigos[i] = codigos[j];
-                        codigos[j] = ordenamiento;
+                        string ordenamiento = datos.codigos[i];
+                        datos.codigos[i] = datos.codigos[j];
+                        datos.codigos[j] = ordenamiento;
 
-                        ordenamiento = dnis[i];
-                        dnis[i] = dnis[j];
-                        dnis[j] = ordenamiento;
+                        ordenamiento = datos.dnis[i];
+                        datos.dnis[i] = datos.dnis[j];
+                        datos.dnis[j] = ordenamiento;
 
-                        ordenamiento = nombres[i];
-                        nombres[i] = nombres[j];
-                        nombres[j] = ordenamiento;
+                        ordenamiento = datos.nombres[i];
+                        datos.nombres[i] = datos.nombres[j];
+                        datos.nombres[j] = ordenamiento;
 
-                        ordenamiento = tramites[i];
-                        tramites[i] = tramites[j];
-                        tramites[j] = ordenamiento;
+                        ordenamiento = datos.tramites[i];
+                        datos.tramites[i] = datos.tramites[j];
+                        datos.tramites[j] = ordenamiento;
 
-                        ordenamiento = areas[i];
-                        areas[i] = areas[j];
-                        areas[j] = ordenamiento;
+                        ordenamiento = datos.areas[i];
+                        datos.areas[i] = datos.areas[j];
+                        datos.areas[j] = ordenamiento;
 
-                        DateTime fechaAux = fechas[i];
-                        fechas[i] = fechas[j];
-                        fechas[j] = fechaAux;
+                        DateTime fechaAux = datos.fechas[i];
+                        datos.fechas[i] = datos.fechas[j];
+                        datos.fechas[j] = fechaAux;
                     }
                 }
             }
        
             dgvExpedientes.Rows.Clear();
 
-            for (int i = 0; i < codigos.Count; i++)
+            for (int i = 0; i < datos.codigos.Count; i++)
             {
                 dgvExpedientes.Rows.Add(
-                    codigos[i], dnis[i], nombres[i],
-                    tramites[i], areas[i],
-                    fechas[i].ToShortDateString()
+                    datos.codigos[i], datos.dnis[i], datos.nombres[i],
+                    datos.tramites[i], datos.areas[i],
+                    datos.fechas[i].ToShortDateString()
                 );
             }
 
