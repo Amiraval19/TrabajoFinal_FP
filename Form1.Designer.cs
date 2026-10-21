@@ -187,6 +187,7 @@
             this.btnBuscar.TabIndex = 14;
             this.btnBuscar.Text = "BUSCAR";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnOrdenar
             // 
@@ -196,6 +197,7 @@
             this.btnOrdenar.TabIndex = 15;
             this.btnOrdenar.Text = "ORDENAR";
             this.btnOrdenar.UseVisualStyleBackColor = true;
+            this.btnOrdenar.Click += new System.EventHandler(this.btnOrdenar_Click);
             // 
             // btnLimpiar
             // 

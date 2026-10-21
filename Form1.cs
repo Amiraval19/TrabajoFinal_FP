@@ -96,5 +96,88 @@ namespace TrabajoFinal_FP
 
             btnLimpiar.PerformClick();
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string codigoBuscar = txtCodigo.Text.Trim();
+            bool encontrado = false;
+
+            if (codigoBuscar == "")
+            {
+                MessageBox.Show("Ingrese un código para buscar");
+                return;
+            }
+
+            for (int i = 0; i < codigos.Count; i++)
+            {
+                if (codigos[i] == codigoBuscar)
+                {
+                    txtDNI.Text = dnis[i];
+                    txtNombre.Text = nombres[i];
+                    cboTramite.Text = tramites[i];
+                    txtArea.Text = areas[i];
+                    dtpFecha.Value = fechas[i];
+
+                    encontrado = true;
+
+                    MessageBox.Show("Expediente encontrado");
+                    break;
+                }
+            }
+
+            if (encontrado == false)
+            {
+                MessageBox.Show("Expediente no encontrado");
+            }
+        }
+
+        private void btnOrdenar_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < codigos.Count; i++)
+            {
+                for (int j = i + 1; j < codigos.Count; j++)
+                {
+                    if (string.Compare(codigos[i], codigos[j]) > 0)
+                    {
+                        string ordenamiento = codigos[i];
+                        codigos[i] = codigos[j];
+                        codigos[j] = ordenamiento;
+
+                        ordenamiento = dnis[i];
+                        dnis[i] = dnis[j];
+                        dnis[j] = ordenamiento;
+
+                        ordenamiento = nombres[i];
+                        nombres[i] = nombres[j];
+                        nombres[j] = ordenamiento;
+
+                        ordenamiento = tramites[i];
+                        tramites[i] = tramites[j];
+                        tramites[j] = ordenamiento;
+
+                        ordenamiento = areas[i];
+                        areas[i] = areas[j];
+                        areas[j] = ordenamiento;
+
+                        DateTime fechaAux = fechas[i];
+                        fechas[i] = fechas[j];
+                        fechas[j] = fechaAux;
+                    }
+                }
+            }
+            //actualizar la tabla después de ordenar las listas.
+            dgvExpedientes.Rows.Clear();
+
+            for (int i = 0; i < codigos.Count; i++)
+            {
+                dgvExpedientes.Rows.Add(
+                    codigos[i], dnis[i], nombres[i],
+                    tramites[i], areas[i],
+                    fechas[i].ToShortDateString()
+                );
+            }
+
+            MessageBox.Show("Expedientes ordenados");
+        }
     }
 }
