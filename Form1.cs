@@ -155,6 +155,16 @@ namespace TrabajoFinal_FP
                 MessageBox.Show("El DNI debe contener exactamente 8 números");
                 return;
             }
+            if (Validaciones.CodigoRepetido(txtCodigo.Text.Trim(), codigos) == true)
+            {
+                MessageBox.Show("El codigo de expediente ya existe, ingrese otro codigo");
+                return;
+            }
+            if (Validaciones.CorregirCaracter(txtCodigo.Text.Trim()) == false)
+            {
+                MessageBox.Show("El codigo no puede contener caracteres especiales");
+                return;
+            }
             codigos.Add(txtCodigo.Text.Trim());
             dnis.Add(txtDNI.Text.Trim());
             nombres.Add(txtNombre.Text.Trim());
