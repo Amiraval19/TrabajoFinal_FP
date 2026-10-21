@@ -150,6 +150,11 @@ namespace TrabajoFinal_FP
                 MessageBox.Show("Por favor, complete los campos vacios");
                 return;
             }
+            if (Validaciones.ValidarDNI(txtDNI.Text.Trim()) == false)
+            {
+                MessageBox.Show("El DNI debe contener exactamente 8 números");
+                return;
+            }
             codigos.Add(txtCodigo.Text.Trim());
             dnis.Add(txtDNI.Text.Trim());
             nombres.Add(txtNombre.Text.Trim());
