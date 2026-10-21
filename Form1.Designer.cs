@@ -53,7 +53,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
             this.label1.Location = new System.Drawing.Point(209, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 20);
@@ -114,7 +116,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 224);
+            this.label7.Location = new System.Drawing.Point(12, 231);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(133, 16);
             this.label7.TabIndex = 6;
@@ -125,6 +127,7 @@
             this.dgvExpedientes.AllowUserToAddRows = false;
             this.dgvExpedientes.AllowUserToDeleteRows = false;
             this.dgvExpedientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvExpedientes.BackgroundColor = System.Drawing.Color.AntiqueWhite;
             this.dgvExpedientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvExpedientes.Location = new System.Drawing.Point(9, 256);
             this.dgvExpedientes.Name = "dgvExpedientes";
@@ -134,6 +137,7 @@
             // 
             // txtCodigo
             // 
+            this.txtCodigo.BackColor = System.Drawing.Color.AntiqueWhite;
             this.txtCodigo.Location = new System.Drawing.Point(168, 39);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(159, 20);
@@ -141,6 +145,7 @@
             // 
             // txtDNI
             // 
+            this.txtDNI.BackColor = System.Drawing.Color.AntiqueWhite;
             this.txtDNI.Location = new System.Drawing.Point(378, 37);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(154, 20);
@@ -148,6 +153,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.BackColor = System.Drawing.Color.AntiqueWhite;
             this.txtNombre.Location = new System.Drawing.Point(165, 69);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(367, 20);
@@ -155,6 +161,7 @@
             // 
             // cboTramite
             // 
+            this.cboTramite.BackColor = System.Drawing.Color.AntiqueWhite;
             this.cboTramite.FormattingEnabled = true;
             this.cboTramite.Location = new System.Drawing.Point(125, 105);
             this.cboTramite.Name = "cboTramite";
@@ -164,6 +171,7 @@
             // 
             // txtArea
             // 
+            this.txtArea.BackColor = System.Drawing.Color.AntiqueWhite;
             this.txtArea.Location = new System.Drawing.Point(380, 106);
             this.txtArea.Name = "txtArea";
             this.txtArea.ReadOnly = true;
@@ -172,6 +180,8 @@
             // 
             // btnRegistrar
             // 
+            this.btnRegistrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnRegistrar.Location = new System.Drawing.Point(9, 171);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(119, 43);
@@ -182,6 +192,8 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnBuscar.Location = new System.Drawing.Point(134, 171);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(130, 43);
@@ -192,6 +204,8 @@
             // 
             // btnOrdenar
             // 
+            this.btnOrdenar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrdenar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnOrdenar.Location = new System.Drawing.Point(267, 171);
             this.btnOrdenar.Name = "btnOrdenar";
             this.btnOrdenar.Size = new System.Drawing.Size(130, 43);
@@ -202,6 +216,8 @@
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnLimpiar.Location = new System.Drawing.Point(402, 171);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(130, 43);
@@ -222,6 +238,7 @@
             // 
             // dtpFecha
             // 
+            this.dtpFecha.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(134, 140);
             this.dtpFecha.Name = "dtpFecha";
@@ -232,6 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(538, 450);
             this.Controls.Add(this.dtpFecha);
             this.Controls.Add(this.label8);
@@ -253,7 +271,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Mesa de Partes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpedientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
