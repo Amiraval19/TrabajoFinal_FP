@@ -132,7 +132,8 @@ namespace TrabajoFinal_FP
             txtDNI.Text = "";
             txtNombre.Text = "";
             txtArea.Text = "";
-            cboTramite.Text = "";
+            cboTramite.SelectedIndex = -1;
+            dtpFecha.Value = DateTime.Today;
             txtCodigo.Focus();
         }
 
@@ -157,9 +158,9 @@ namespace TrabajoFinal_FP
                 MessageBox.Show("El codigo de expediente ya existe, ingrese otro codigo");
                 return;
             }
-            if (Validaciones.CorregirCaracter(txtCodigo.Text.Trim()) == false)
+            if (Validaciones.CorregirCaracter(txtCodigo.Text.Trim()) == false || Validaciones.CorregirCaracter(txtNombre.Text.Trim()) == false)
             {
-                MessageBox.Show("El codigo no puede contener caracteres especiales");
+                MessageBox.Show("El codigo y el nombre no pueden contener caracteres especiales");
                 return;
             }
             datos.codigos.Add(txtCodigo.Text.Trim());
@@ -263,7 +264,7 @@ namespace TrabajoFinal_FP
                     datos.fechas[i].ToShortDateString()
                 );
             }
-
+            GuardarExcel();
             MessageBox.Show("Expedientes ordenados");
         }
     }
