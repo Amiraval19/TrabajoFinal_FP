@@ -156,6 +156,7 @@
             this.cboTramite.Name = "cboTramite";
             this.cboTramite.Size = new System.Drawing.Size(146, 21);
             this.cboTramite.TabIndex = 11;
+            this.cboTramite.SelectedIndexChanged += new System.EventHandler(this.cboTramite_SelectedIndexChanged);
             // 
             // txtArea
             // 
@@ -200,6 +201,7 @@
             this.btnLimpiar.TabIndex = 16;
             this.btnLimpiar.Text = "LIMPIAR";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // label8
             // 
@@ -213,7 +215,6 @@
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Enabled = false;
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(134, 140);
             this.dtpFecha.Name = "dtpFecha";
